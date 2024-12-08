@@ -1,4 +1,6 @@
-export const theme = {
+import { DefaultTheme } from 'styled-components'
+
+const theme: DefaultTheme = {
   colors: {
     light: {
       background: '#f4f6f9',
@@ -21,27 +23,7 @@ export const theme = {
       }
     }
   },
-  typography: {
-    fontFamily: 'Noto Sans Korean, sans-serif',
-    fontSize: {
-      h1: '2.5rem',
-      h2: '2rem',
-      h3: '1.75rem',
-      body: '1rem',
-      caption: '0.875rem'
-    },
-    fontWeight: {
-      light: 300,
-      regular: 400,
-      bold: 700
-    }
-  },
-  spacing: {
-    grid: 8,
-    padding: {
-      small: '8px',
-      medium: '16px',
-      large: '24px'
-    }
-  }
-}; 
+  mode: 'light' as const
+}
+
+export { theme } 
