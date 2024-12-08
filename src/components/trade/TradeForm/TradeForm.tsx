@@ -8,7 +8,7 @@ const FormWrapper = styled.form`
   display: flex;
   flex-direction: column;
   gap: ${({ theme }) => theme.spacing.md};
-  max-width: 600px;
+  width: 100%;
   margin: 0 auto;
   padding: ${({ theme }) => theme.spacing.lg};
   background-color: ${({ theme }) => theme.colors[theme.mode].background.secondary};
