@@ -87,6 +87,32 @@ const SubmitButton = styled.button`
   }
 `
 
+const StyledInput = styled(Input)`
+  color: #4d4d4d;
+  
+  &[type="date"] {
+    position: relative;
+    padding-right: 35px;
+    z-index: 1;
+  }
+
+  &[type="date"]::-webkit-calendar-picker-indicator {
+    display: block;
+    background: transparent;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    opacity: 1;
+    z-index: 2;
+  }
+`
+
+const StyledSelect = styled(Select)`
+  color: #4d4d4d;
+`
+
 export const TradeForm = () => {
   const { addTrade } = useTradeStore()
   const [formData, setFormData] = useState<TradeFormData>({
@@ -143,7 +169,7 @@ export const TradeForm = () => {
       <FormRow>
         <FormGroup>
           <Label htmlFor="date">거래일</Label>
-          <Input
+          <StyledInput
             type="date"
             id="date"
             value={formData.date.toISOString().split('T')[0]}
@@ -154,7 +180,7 @@ export const TradeForm = () => {
         
         <FormGroup>
           <Label htmlFor="country">국가</Label>
-          <Select
+          <StyledSelect
             id="country"
             value={formData.country}
             onChange={(e) => handleChange('country', e.target.value as Country)}
@@ -167,7 +193,7 @@ export const TradeForm = () => {
       <FormRow>
         <FormGroup>
           <Label htmlFor="broker">증권사</Label>
-          <Select
+          <StyledSelect
             id="broker"
             value={formData.brokerId}
             onChange={(e) => handleChange('brokerId', e.target.value)}
@@ -180,7 +206,7 @@ export const TradeForm = () => {
       <FormRow>
         <FormGroup>
           <Label htmlFor="ticker">티커</Label>
-          <Input
+          <StyledInput
             type="text"
             id="ticker"
             value={formData.ticker}
@@ -192,7 +218,7 @@ export const TradeForm = () => {
 
         <FormGroup>
           <Label htmlFor="stockName">종목명</Label>
-          <Input
+          <StyledInput
             type="text"
             id="stockName"
             value={formData.stockName}
@@ -206,7 +232,7 @@ export const TradeForm = () => {
       <FormRow>
         <FormGroup>
           <Label htmlFor="type">거래 유형</Label>
-          <Select
+          <StyledSelect
             id="type"
             value={formData.type}
             onChange={(e) => handleChange('type', e.target.value as TradeType)}
@@ -219,7 +245,7 @@ export const TradeForm = () => {
       <FormRow>
         <FormGroup>
           <Label htmlFor="quantity">수량</Label>
-          <Input
+          <StyledInput
             type="text"
             id="quantity"
             value={formatNumber(formData.quantity)}
@@ -231,7 +257,7 @@ export const TradeForm = () => {
         
         <FormGroup>
           <Label htmlFor="price">단가 ({formData.currency})</Label>
-          <Input
+          <StyledInput
             type="text"
             id="price"
             value={formatNumber(formData.price)}
