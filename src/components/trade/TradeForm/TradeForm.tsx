@@ -1,10 +1,8 @@
-import React from 'react'
-import { useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-import { TradeFormData, Country, Broker, TradeType } from '../../../types/trade'
+import { Trade, TradeFormData, Country, Broker, TradeType } from '../../../types/trade'
 import { Input } from '../../common/Input/Input'
 import { Select } from '../../common/Select/Select'
-import { useTradeStore } from '../../../stores/tradeStore'
 
 const FormWrapper = styled.form`
   display: flex;
@@ -113,19 +111,30 @@ const StyledSelect = styled(Select)`
   color: #4d4d4d;
 `
 
-export const TradeForm = () => {
-  const { addTrade } = useTradeStore()
-  const [formData, setFormData] = useState<TradeFormData>({
-    date: new Date(),
-    country: 'KOR',
-    brokerId: '',
-    ticker: '',
-    stockName: '',
-    type: 'buy',
-    quantity: 0,
-    price: 0,
-    currency: 'KRW'
-  })
+interface TradeFormProps {
+  initialData?: Trade
+  onSubmit?: (data: TradeFormData) => void
+  isEdit?: boolean
+}
+
+export const TradeForm = ({ 
+  initialData, 
+  onSubmit = () => {},
+  isEdit = false 
+}: TradeFormProps) => {
+  const [formData, setFormData] = useState<TradeFormData>(
+    initialData || {
+      date: new Date(),
+      country: 'KOR',
+      brokerId: '',
+      ticker: '',
+      stockName: '',
+      type: 'buy',
+      quantity: 0,
+      price: 0,
+      currency: 'KRW',
+    }
+  )
 
   const handleChange = (
     name: keyof TradeFormData,
@@ -143,7 +152,7 @@ export const TradeForm = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    addTrade(formData)
+    onSubmit(formData)
     console.log('Form submitted:', formData)
   }
 
@@ -164,7 +173,7 @@ export const TradeForm = () => {
 
   return (
     <FormWrapper onSubmit={handleSubmit}>
-      <FormTitle>거래 입력</FormTitle>
+      <FormTitle>{isEdit ? '거래 수정' : '거래 입력'}</FormTitle>
       
       <FormRow>
         <FormGroup>
@@ -270,7 +279,9 @@ export const TradeForm = () => {
 
       <FormRow>
         <FormGroup>
-          <SubmitButton type="submit">저장</SubmitButton>
+          <SubmitButton type="submit">
+            {isEdit ? '수정' : '저장'}
+          </SubmitButton>
         </FormGroup>
       </FormRow>
     </FormWrapper>

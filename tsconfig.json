@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es2015",
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true,
@@ -10,7 +10,9 @@
     "paths": {
       "@types/*": ["types/*"]
     },
-    "jsx": "react"
+    "jsx": "react",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "downlevelIteration": true
   },
   "include": ["src"]
 }
