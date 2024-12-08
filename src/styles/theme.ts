@@ -22,9 +22,9 @@ const theme: DefaultTheme = {
       },
       action: {
         primary: '#2980b9',    // 주요 액션
-        secondary: '#27ae60',   // 성공/긍정
+        secondary: '#8e44ad',   // 성공/긍정
         danger: '#e74c3c',     // 위험/경고
-        hover: '#3498db'       // 호버 상태
+        hover: '#3498db',       // 호버 상태
       }
     },
     dark: {
@@ -46,10 +46,10 @@ const theme: DefaultTheme = {
         secondary: '#404040'    // 보조 테두리
       },
       action: {
-        primary: '#3498db',    // 주요 액션
-        secondary: '#2ecc71',   // 성공/긍정
+        primary: '#2980b9',    // 주요 액션
+        secondary: '#8e44ad',   // 성공/긍정
         danger: '#e74c3c',     // 위험/경고
-        hover: '#2980b9'       // 호버 상태
+        hover: '#3498db',       // 호버 상태
       }
     }
   },

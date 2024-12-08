@@ -4,10 +4,10 @@ import { useThemeStore } from './stores/themeStore'
 import { GlobalStyle } from './styles/GlobalStyle'
 import { theme } from './styles/theme'
 import { Layout } from './components/layout/Layout/Layout'
+import { StocksPage } from './pages/Stocks/StocksPage'
 
 // 임시 페이지 컴포넌트들
 const Dashboard = () => <div>대시보드</div>
-const Stocks = () => <div>주식 현황</div>
 const Portfolio = () => <div>포트폴리오</div>
 const Settings = () => <div>설정</div>
 
@@ -21,7 +21,7 @@ function App() {
         <Layout>
           <Routes>
             <Route path="/" element={<Dashboard />} />
-            <Route path="/stocks" element={<Stocks />} />
+            <Route path="/stocks" element={<StocksPage />} />
             <Route path="/portfolio" element={<Portfolio />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
