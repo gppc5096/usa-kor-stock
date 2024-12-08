@@ -8,9 +8,9 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: ${({ theme }) => theme.colors[theme.mode].background};
-    color: ${({ theme }) => theme.colors[theme.mode].text.main};
+    font-family: ${({ theme }) => theme.typography.fontFamily.primary};
+    background-color: ${({ theme }) => theme.colors[theme.mode].background.primary};
+    color: ${({ theme }) => theme.colors[theme.mode].text.primary};
   }
 
   button {

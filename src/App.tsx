@@ -4,20 +4,27 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { QueryClientProvider } from '@tanstack/react-query'
 import { ThemeProvider } from 'styled-components'
+import styled from 'styled-components'
 import { queryClient } from './lib/queryClient'
 import { useThemeStore } from './store/themeStore'
 import { theme } from './styles/theme'
 import { GlobalStyle } from './styles/GlobalStyle'
 
+const AppWrapper = styled.div`
+  background-color: ${({ theme }) => theme.colors[theme.mode].background};
+  color: ${({ theme }) => theme.colors[theme.mode].text.primary};
+`
+
 function App() {
   const [count, setCount] = useState(0)
   const darkMode = useThemeStore((state) => state.darkMode)
+  const currentMode = darkMode ? 'dark' : 'light'
 
   return (
     <QueryClientProvider client={queryClient}>
       <ThemeProvider theme={{
         ...theme,
-        mode: darkMode ? 'dark' : 'light'
+        mode: currentMode
       }}>
         <GlobalStyle />
         <div>
@@ -40,12 +47,9 @@ function App() {
         <p className="read-the-docs">
           Click on the Vite and React logos to learn more
         </p>
-        <div style={{ 
-          backgroundColor: darkMode ? theme.colors.dark.background : theme.colors.light.background,
-          color: darkMode ? theme.colors.dark.text.main : theme.colors.light.text.main
-        }}>
-          안녕하세요..여러분... 
-        </div>
+        <AppWrapper>
+          Hello World.................
+        </AppWrapper>
       </ThemeProvider>
     </QueryClientProvider>
   )
