@@ -1,57 +1,33 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { QueryClientProvider } from '@tanstack/react-query'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import styled from 'styled-components'
-import { queryClient } from './lib/queryClient'
-import { useThemeStore } from './store/themeStore'
-import { theme } from './styles/theme'
+import { useThemeStore } from './stores/themeStore'
 import { GlobalStyle } from './styles/GlobalStyle'
+import { theme } from './styles/theme'
+import { Layout } from './components/layout/Layout/Layout'
 
-const AppWrapper = styled.div`
-  background-color: ${({ theme }) => theme.colors[theme.mode].background};
-  color: ${({ theme }) => theme.colors[theme.mode].text.primary};
-`
+// 임시 페이지 컴포넌트들
+const Dashboard = () => <div>대시보드</div>
+const Stocks = () => <div>주식 현황</div>
+const Portfolio = () => <div>포트폴리오</div>
+const Settings = () => <div>설정</div>
 
 function App() {
-  const [count, setCount] = useState(0)
-  const darkMode = useThemeStore((state) => state.darkMode)
-  const currentMode = darkMode ? 'dark' : 'light'
+  const { mode } = useThemeStore()
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ThemeProvider theme={{
-        ...theme,
-        mode: currentMode
-      }}>
-        <GlobalStyle />
-        <div>
-          <a href="https://vite.dev" target="_blank">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
-        </div>
-        <h1>Vite + React</h1>
-        <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>
-            count is {count}
-          </button>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test HMR
-          </p>
-        </div>
-        <p className="read-the-docs">
-          Click on the Vite and React logos to learn more
-        </p>
-        <AppWrapper>
-          Hello World.................
-        </AppWrapper>
-      </ThemeProvider>
-    </QueryClientProvider>
+    <ThemeProvider theme={{ ...theme, mode }}>
+      <GlobalStyle />
+      <Router>
+        <Layout>
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+            <Route path="/stocks" element={<Stocks />} />
+            <Route path="/portfolio" element={<Portfolio />} />
+            <Route path="/settings" element={<Settings />} />
+          </Routes>
+        </Layout>
+      </Router>
+    </ThemeProvider>
   )
 }
 
